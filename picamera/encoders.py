@@ -1085,6 +1085,7 @@ class PiCookedOneImageEncoder(PiOneImageEncoder):
     def _add_exif_tag(self, tag, value):
         # Format the tag and value into an appropriate bytes string, encoded
         # with the Exif encoding (ASCII)
+        print("Added: " + str(tag) + " " + str(value))
         if isinstance(tag, str):
             tag = tag.encode(self.exif_encoding)
         if isinstance(value, str):
