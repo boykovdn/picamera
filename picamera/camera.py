@@ -847,11 +847,11 @@ class PiCamera(object):
         The length of *source* must take into account that widths are rounded
         up to the nearest multiple of 32, and heights to the nearest multiple
         of 16.  For example, if *size* is ``(1280, 720)``, and *format* is
-        ``'rgb'``, then *source* must be a buffer with length 1280 × 720 × 3
+        ``'rgb'``, then *source* must be a buffer with length 1280 Ã 720 Ã 3
         bytes, or 2,764,800 bytes (because 1280 is a multiple of 32, and 720 is
         a multiple of 16 no extra rounding is required).  However, if *size* is
         ``(97, 57)``, and *format* is ``'rgb'`` then *source* must be a buffer
-        with length 128 × 64 × 3 bytes, or 24,576 bytes (pixels beyond column
+        with length 128 Ã 64 Ã 3 bytes, or 24,576 bytes (pixels beyond column
         97 and row 57 in the source will be ignored).
 
         New overlays default to *layer* 0, whilst the preview defaults to layer
@@ -1759,6 +1759,12 @@ class PiCamera(object):
         module, and 'imx219' for the V2 module.
         """
         return self._revision
+
+    def _set_exif_tags(self, new_exif_tags):
+        """
+        INPUT: dictionary of <typename>:<typevalue> pairs.
+        """
+        self._exif_tags = new_exif_tags
 
     @property
     def exif_tags(self):
@@ -2744,7 +2750,7 @@ class PiCamera(object):
 
             In later firmwares, this attribute is limited by the value of the
             :attr:`framerate` attribute. For example, if framerate is set to
-            30fps, the shutter speed cannot be slower than 33,333µs (1/fps).
+            30fps, the shutter speed cannot be slower than 33,333Âµs (1/fps).
         """)
 
     def _get_exposure_speed(self):
